@@ -1,0 +1,250 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "My Cat and dog server api swagger",
+      "description": "Yet Another Node.js Cat and dog server api swagger",
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    "host": "localhost:3000",
+    "basePath": "",
+    "tags": [
+        {
+        "name": "Cats",
+        "description": "API for Cats in the system"
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths":{
+        "/cat":{
+            "get" :{
+                "tags":["Cats"],
+                "summery": "Get all Cats",
+                "responses":{
+                    "200":{
+                        "description":"ok",
+                        "schima":{
+                            "$ref": "#definitions/Cats"
+                        }
+                    }
+                }
+            },
+            "post":{
+                "tags":["Cats"],
+                "summery": "Create a new  Cat",
+                "parameters":[
+                    {
+                        "in":"body",
+                        "name":"body",
+                        "description":"The cat we want to add ",
+                        "schema":{
+                            "$ref": "#definitions/Cat"
+                        }
+                    }
+                ],
+                "products":["application/json"],
+                "responses":{
+                    "200":{
+                        "description":"ok",
+                        "schima":{
+                            "$ref": "#definitions/Cats"
+                        }
+                    }
+                }
+            }
+        },
+        "/cat/{id}":{
+            "parameters":[
+                {
+                    "in":"path",
+                    "name":"id",
+                    "required":true,
+                    "description":"ID of the cat that we want to match ",
+                    "type":"string"
+                }
+            ],
+            "get": {
+                "tags":["Cats"],
+                "summery": "get cat with given id",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "description": "Cat with id",
+                        "schema": {
+                            "$ref": "#/definitions/id"
+                        }
+                    }
+                ], 
+                
+                "products":["application/json"],
+                "responses":{
+                    "200":{
+                        "description":"ok",
+                        "schima":{
+                            "$ref": "#definitions/Cat"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update cat with given ID",
+                "tags": [
+                    "Cats"
+                ],
+                "requestBody": {
+                    "description": "Cat Object",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/Cat"
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "description": "Cat with new values of properties",
+                        "schema": {
+                            "$ref": "#/definitions/id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Cat"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed. Bad post data."
+                    },
+                    "404": {
+                        "description": "Failed. Cat not found."
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete cat with given ID",
+                "tags": [
+                    "Cats"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "description": "Delete Cat with id",
+                        "schema": {
+                            "$ref": "#/definitions/id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/id"
+                        }
+                    },
+                    "404": {
+                        "description": "Failed. Cat not found."
+                    }
+                }
+            }
+        },
+        "/cats":{
+            
+            "get": {
+                "tags":["Cats"],
+                "summery": "get cats with given search",
+                "parameters":[
+                    {
+                        "in":"body",
+                        "name":"body",
+                        "description":"The cats we want to find ",
+                        "schema":{
+                            "$ref": "#definitions/Cat"
+                        }
+                    }
+                ], 
+                
+                "products":["application/json"],
+                "responses":{
+                    "200":{
+                        "description":"ok",
+                        "schima":{
+                            "$ref": "#definitions/Cats"
+                        }
+                    }
+                }
+            }
+        }
+        
+    },
+    "definitions":{
+        "id":{
+            "properties":{
+                "uuid":{
+                    "type": "string"
+                }
+            }
+        },
+        "Cat":{
+            "type" : "object",
+            "properties":{
+                "name": { "type": "string"},
+                "age": {"type" : "integer"},
+                "type": { "type": "string"}
+            }
+        },
+        "Cats":{
+            "type" : "object",
+            "properties":{
+                "cats":{
+                    "type" : "object",
+                    "additionalProperties":{
+                        "$ref": "#definitions/Cat"
+                    }
+                }
+            }
+        },
+        "Dog":{
+            "type" : "object",
+            "properties":{
+                "name": { "type": "string"},
+                "age": {"type" : "integer"},
+                "type": { "type": "string"},
+                "color": { "type": "string"}
+            }
+        },
+        "Dogs":{
+            "type" : "object",
+            "properties":{
+                "cats":{
+                    "type" : "object",
+                    "additionalProperties":{
+                        "$ref": "#definitions/Dog"
+                    }
+                }
+            }
+        }
+    }
+}
