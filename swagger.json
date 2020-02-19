@@ -15,6 +15,18 @@
         {
         "name": "Cats",
         "description": "API for Cats in the system"
+        },
+        {
+            "name": "Dogs",
+            "description": "API for Dogs in the system"
+        },
+        {
+            "name": "Persons",
+            "description": "API for Persons in the system"
+        },
+        {
+            "name": "Owners",
+            "description": "API for Owner in the system"
         }
     ],
     "schemes": [
@@ -30,7 +42,7 @@
         "/cat":{
             "get" :{
                 "tags":["Cats"],
-                "summery": "Get all Cats",
+                "summary": "Get all Cats",
                 "responses":{
                     "200":{
                         "description":"ok",
@@ -42,7 +54,7 @@
             },
             "post":{
                 "tags":["Cats"],
-                "summery": "Create a new  Cat",
+                "summary": "Create a new  Cat",
                 "parameters":[
                     {
                         "in":"body",
@@ -124,6 +136,15 @@
                         "schema": {
                             "$ref": "#/definitions/id"
                         }
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": true,
+                        "description": "Cat with new values of properties",
+                        "schema": {
+                            "$ref": "#/definitions/Cat"
+                        }
                     }
                 ],
                 "responses": {
@@ -174,7 +195,7 @@
             
             "get": {
                 "tags":["Cats"],
-                "summery": "get cats with given search",
+                "summary": "get cats with given search",
                 "parameters":[
                     {
                         "in":"body",
@@ -196,8 +217,519 @@
                     }
                 }
             }
-        }
+        },
         
+    "/person":{
+        "get" :{
+            "tags":["Persons"],
+            "summary": "Get all Persons",
+            "responses":{
+                "200":{
+                    "description":"ok",
+                    "schima":{
+                        "$ref": "#definitions/Persons"
+                    }
+                }
+            }
+        },
+        "post":{
+            "tags":["Persons"],
+            "summary": "Create a new  person",
+            "parameters":[
+                {
+                    "in":"body",
+                    "name":"body",
+                    "description":"The person we want to add ",
+                    "schema":{
+                        "$ref": "#definitions/Person"
+                    }
+                }
+            ],
+            "products":["application/json"],
+            "responses":{
+                "200":{
+                    "description":"ok",
+                    "schima":{
+                        "$ref": "#definitions/Persons"
+                    }
+                }
+            }
+        }
+    },
+    "/person/{id}":{
+        "parameters":[
+            {
+                "in":"path",
+                "name":"id",
+                "required":true,
+                "description":"ID of the person that we want to match ",
+                "type":"string"
+            }
+        ],
+        "get": {
+            "tags":["Persons"],
+            "summery": "get person with given id",
+            "parameters": [
+                {
+                    "in": "path",
+                    "name": "id",
+                    "required": true,
+                    "description": "Person with id",
+                    "schema": {
+                        "$ref": "#/definitions/id"
+                    }
+                }
+            ], 
+            
+            "products":["application/json"],
+            "responses":{
+                "200":{
+                    "description":"ok",
+                    "schima":{
+                        "$ref": "#definitions/Person"
+                    }
+                }
+            }
+        },
+        "put": {
+            "summary": "Update person with given ID",
+            "tags": [
+                "Persons"
+            ],
+            "requestBody": {
+                "description": "Person Object",
+                "required": true,
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/definitions/Person"
+                        }
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "in": "path",
+                    "name": "id",
+                    "required": true,
+                    "description": "Person with new values of properties",
+                    "schema": {
+                        "$ref": "#/definitions/id"
+                    }
+                },
+                {
+                    "in": "body",
+                    "name": "body",
+                    "required": true,
+                    "description": "Person with new values of properties",
+                    "schema": {
+                        "$ref": "#/definitions/Person"
+                    }
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                        "$ref": "#/definitions/Person"
+                    }
+                },
+                "400": {
+                    "description": "Failed. Bad post data."
+                },
+                "404": {
+                    "description": "Failed. Cat not found."
+                }
+            }
+        },
+        "delete": {
+            "summary": "Delete Person with given ID",
+            "tags": [
+                "Persons"
+            ],
+            "parameters": [
+                {
+                    "in": "path",
+                    "name": "id",
+                    "required": true,
+                    "description": "Delete Person with id",
+                    "schema": {
+                        "$ref": "#/definitions/id"
+                    }
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                        "$ref": "#/definitions/id"
+                    }
+                },
+                "404": {
+                    "description": "Failed. Person not found."
+                }
+            }
+        }
+    },
+    "/persons":{
+        
+        "get": {
+            "tags":["Persons"],
+            "summary": "get persons with given search",
+            "parameters":[
+                {
+                    "in":"body",
+                    "name":"body",
+                    "description":"The persons we want to find ",
+                    "schema":{
+                        "$ref": "#definitions/Person"
+                    }
+                }
+            ], 
+            
+            "products":["application/json"],
+            "responses":{
+                "200":{
+                    "description":"ok",
+                    "schima":{
+                        "$ref": "#definitions/Persons"
+                    }
+                }
+            }
+        }
+    },
+    "/owner":{
+        "get" :{
+            "tags":["Owners"],
+            "summary": "Get all owners",
+            "responses":{
+                "200":{
+                    "description":"ok",
+                    "schima":{
+                        "$ref": "#definitions/Owners"
+                    }
+                }
+            }
+        },
+        "post":{
+            "tags":["Owners"],
+            "summary": "Create a new  owner",
+            "parameters":[
+                {
+                    "in":"body",
+                    "name":"body",
+                    "description":"The owner we want to add ",
+                    "schema":{
+                        "$ref": "#definitions/Owner"
+                    }
+                }
+            ],
+            "products":["application/json"],
+            "responses":{
+                "200":{
+                    "description":"ok",
+                    "schima":{
+                        "$ref": "#definitions/Owners"
+                    }
+                }
+            }
+        }
+    },
+    "/owner/{id}":{
+        "parameters":[
+            {
+                "in":"path",
+                "name":"id",
+                "required":true,
+                "description":"ID of the owner that we want to match ",
+                "type":"string"
+            }
+        ],
+        "get": {
+            "tags":["Owners"],
+            "summary": "get owner with given id",
+            "parameters": [
+                {
+                    "in": "path",
+                    "name": "id",
+                    "required": true,
+                    "description": "owner with id",
+                    "schema": {
+                        "$ref": "#/definitions/id"
+                    }
+                }
+            ], 
+            
+            "products":["application/json"],
+            "responses":{
+                "200":{
+                    "description":"ok",
+                    "schima":{
+                        "$ref": "#/definitions/Owner"
+                    }
+                }
+            }
+        },
+        "put": {
+            "summary": "Update owner with given ID",
+            "tags": ["Owners"],
+            "requestBody": {
+                "description": "Person Object",
+                "required": true,
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/definitions/Person"
+                        }
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "in": "path",
+                    "name": "id",
+                    "required": true,
+                    "description": "Owner  with new values of properties",
+                    "schema": {
+                        "$ref": "#/definitions/id"
+                    }
+                },
+                
+                {
+                    "in": "body",
+                    "name": "body",
+                    "required": true,
+                    "description": "Owner with new values of properties",
+                    "schema": {
+                        "$ref": "#/definitions/Owner"
+                    }
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                        "$ref": "#/definitions/owner"
+                    }
+                },
+                "400": {
+                    "description": "Failed. Bad post data."
+                },
+                "404": {
+                    "description": "Failed. Cat not found."
+                }
+            }
+        },
+        "delete": {
+            "summary": "Delete owner with given ID",
+            "tags": [
+                "Owners"
+            ],
+            "parameters": [
+                {
+                    "in": "path",
+                    "name": "id",
+                    "required": true,
+                    "description": "Delete owner with id",
+                    "schema": {
+                        "$ref": "#/definitions/id"
+                    }
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                        "$ref": "#/definitions/id"
+                    }
+                },
+                "404": {
+                    "description": "Failed. owner not found."
+                }
+            }
+        }
+    },
+    "/owners":{
+        
+        "get": {
+            "tags":["Owners"],
+            "summary": "get owners with given search",
+            "parameters":[
+                {
+                    "in":"body",
+                    "name":"body",
+                    "description":"The owners we want to find ",
+                    "schema":{
+                        "$ref": "#definitions/Owner"
+                    }
+                }
+            ], 
+            
+            "products":["application/json"],
+            "responses":{
+                "200":{
+                    "description":"ok",
+                    "schima":{
+                        "$ref": "#definitions/Owners"
+                    }
+                }
+            }
+        }
+    }
+    ,
+        "/dog":{
+            "get" :{
+                "tags":["Dogs"],
+                "summary": "Get all Dods",
+                "responses":{
+                    "200":{
+                        "description":"ok",
+                        "schima":{
+                            "$ref": "#definitions/Dogs"
+                        }
+                    }
+                }
+            },
+            "post":{
+                "tags":["Dogs"],
+                "summary": "Create a new  Dog",
+                "parameters":[
+                    {
+                        "in":"body",
+                        "name":"body",
+                        "description":"The cat we want to add ",
+                        "schema":{
+                            "$ref": "#definitions/Dog"
+                        }
+                    }
+                ],
+                "products":["application/json"],
+                "responses":{
+                    "200":{
+                        "description":"ok",
+                        "schima":{
+                            "$ref": "#definitions/Dogs"
+                        }
+                    }
+                }
+            }
+        },
+        "/dog/{id}":{
+            "parameters":[
+                {
+                    "in":"path",
+                    "name":"id",
+                    "required":true,
+                    "description":"ID of the dog that we want to match ",
+                    "type":"string"
+                }
+            ],
+            "get": {
+                "summary": "get dog with given id",
+                "tags":["Dogs"],                
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "description": "Dog with id",
+                        "schema": {
+                            "$ref": "#/definitions/id"
+                        }
+                    }
+                ], 
+                
+                "products":["application/json"],
+                "responses":{
+                    "200":{
+                        "description":"ok",
+                        "schima":{
+                            "$ref": "#definitions/Dog"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update Dog with given ID",
+                "tags": [
+                    "Dogs"
+                ],
+                "requestBody": {
+                    "description": "Dog Object",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/Dog"
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "description": "Dog with new values of properties",
+                        "schema": {
+                            "$ref": "#/definitions/id"
+                        }
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": true,
+                        "description": "Dog with new values of properties",
+                        "schema": {
+                            "$ref": "#/definitions/Dog"
+                        }
+                    }
+                    
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Dog"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed. Bad post data."
+                    },
+                    "404": {
+                        "description": "Failed. Dog not found."
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete Dog with given ID",
+                "tags": [
+                    "Dogs"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "description": "Delete Cat with id",
+                        "schema": {
+                            "$ref": "#/definitions/id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/id"
+                        }
+                    },
+                    "404": {
+                        "description": "Failed. Dog not found."
+                    }
+                }
+            }
+        }
     },
     "definitions":{
         "id":{
@@ -238,10 +770,50 @@
         "Dogs":{
             "type" : "object",
             "properties":{
-                "cats":{
+                "dogs":{
                     "type" : "object",
                     "additionalProperties":{
                         "$ref": "#definitions/Dog"
+                    }
+                }
+            }
+        },
+        "Person":{
+            "type" : "object",
+            "properties":{
+                "firstName": { "type": "string"},
+                "lastName": { "type": "string"},
+                "phoneNumber": {"type" : "integer"},
+                "address": { "type": "string"}              
+            }
+        },
+        "Persons":{
+            "type" : "object",
+            "properties":{
+                "cats":{
+                    "type" : "object",
+                    "additionalProperties":{
+                        "$ref": "#definitions/Person"
+                    }
+                }
+            }
+        },
+        "Owner":{
+            "type" : "object",
+            "properties":{
+                "personId": { "type": "string"},
+                "catId": { "type": "string"},
+                "dogId": { "type": "string"} 
+                
+            }
+        },
+        "Owners":{
+            "type" : "object",
+            "properties":{
+                "cats":{
+                    "type" : "object",
+                    "additionalProperties":{
+                        "$ref": "#definitions/Owner"
                     }
                 }
             }

@@ -1,5 +1,5 @@
 var _ = require('lodash')
-const Cat = require('./cat_model')
+const Cat = require('../models/cat_model')
 
 module.exports = function(app){
     //_cats =[];

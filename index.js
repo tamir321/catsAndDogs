@@ -18,9 +18,10 @@ app.use(bodyParser.urlencoded({
 app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 
-const cats = require('./cats_routes')(app);
-const dogs = require('./dogs_routes')(app);
-
+const cats = require('./routes/cats_routes')(app);
+const dogs = require('./routes/dogs_routes')(app);
+const persons =  require('./routes/person_routes')(app);
+const owners =  require('./routes/owner_routes')(app);
 const server = app.listen(3000,function(){
     console.log('Server runnig at http://127.0.0.1:3000/');
 })

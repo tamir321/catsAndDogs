@@ -1,5 +1,5 @@
 var _ = require('lodash')
-const Dog = require('./dog_model')
+const Dog = require('../models/dog_model')
 
 module.exports = function(app){
     
