@@ -7,7 +7,27 @@ const swaggerUi = require('swagger-ui-express')
 const swaggerDocument = require('./swagger.json')
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/cats',{
+
+//user tamir321
+//password PUPKbJsQOi9GNhET
+
+//mongodb+srv://tamir321:<password>@cluster0.g41k0.mongodb.net/<dbname>?retryWrites=true&w=majority
+
+//mongodb+srv://tamir321:PUPKbJsQOi9GNhET@cluster0.g41k0.mongodb.net/<dbname>?retryWrites=true&w=majority
+
+
+
+//const MongoClient = require('mongodb').MongoClient;
+const uri = "mongodb+srv://tamir321:PUPKbJsQOi9GNhET@cluster0.g41k0.mongodb.net/petshop?retryWrites=true&w=majority";
+//const client = new MongoClient(uri, { useNewUrlParser: true });
+// client.connect(err => {
+//   const collection = client.db("test").collection("devices");
+//   // perform actions on the collection object
+//   client.close();
+// });
+
+//mongoose.connect('mongodb://localhost/cats',{
+mongoose.connect(uri,{
     useNewUrlParser: true,
     useUnifiedTopology: true
   });
