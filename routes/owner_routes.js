@@ -27,13 +27,13 @@ module.exports = function(app){
         }
         if(person && (cat || dog)){
             
-            newOwner.save(function(err){
+            newOwner.save(function(err, Owners){
                 if (err){
                     console.log(jnk.info)
                     res.json({info: 'error during create', error:err});
                     return
                 };
-                res.json({info: 'owner record was created successfully'});
+                res.json({info: 'owner record was created successfully',data: Owners});
             })
         }else {
             res.status(209).json({info: 'owner fail to find person or pet'});

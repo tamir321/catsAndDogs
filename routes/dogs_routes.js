@@ -6,12 +6,12 @@ module.exports = function(app){
     /* Create*/
     app.post('/dog',function(req,res){
         var newDog = new Dog(req.body);
-       newDog.save(function(err){
+       newDog.save(function(err,dog){
            if (err){
                
                res.json({info: 'error during create', error:err});
            };
-           res.json({info: 'dog was created successfully'});
+           res.json({info: 'dog was created successfully',data:dog});
        })
     });
 

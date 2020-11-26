@@ -1,4 +1,4 @@
-
+require('dotenv').config();
 const express = require('express')
 const app = express()
 
@@ -18,7 +18,8 @@ const mongoose = require('mongoose');
 
 
 //const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://tamir321:PUPKbJsQOi9GNhET@cluster0.g41k0.mongodb.net/petshop?retryWrites=true&w=majority";
+const uri = process.env.MONGOURI
+//"mongodb+srv://tamir321:PUPKbJsQOi9GNhET@cluster0.g41k0.mongodb.net/petshop?retryWrites=true&w=majority";
 //const client = new MongoClient(uri, { useNewUrlParser: true });
 // client.connect(err => {
 //   const collection = client.db("test").collection("devices");
