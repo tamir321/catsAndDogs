@@ -67,13 +67,13 @@ module.exports = function(app){
                 return
             };
             if(person){
-                _.merge(person,req.body);
-                person.save(function(err){
+               // _.merge(person,req.body);
+                person.updateOne({_id:req.params.id},function(err,person){
                     if (err){
                         res.json({info: 'error during update', error:err});
                         return
                     };
-                    res.status(400).json({info: 'person was update successfully'});
+                    res.status(400).json({info: 'person was update successfully',data:person});
                 })
             
            }else{

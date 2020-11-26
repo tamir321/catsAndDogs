@@ -67,13 +67,14 @@ module.exports = function(app){
                 return
             };
             if(dog){
-                _.merge(dog,req.body);
-                Dog.save(function(err){
+               // _.merge(dog,req.body);
+                Dog.updateOne({_id:req.params.id},req.body,function(err,dog){
                     if (err){
                         res.json({info: 'error during update', error:err});
                         return
                     };
-                    res.json({info: 'dog was update successfully'});
+                    res.json({info: 'dog was update successfully',data: dog});
+                   
                 })
             
            }else{
