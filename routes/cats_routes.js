@@ -73,7 +73,7 @@ module.exports = function(app){
                         res.json({info: 'error during update', error:err});
                         return
                     };
-                    res.status(400).json({info: 'cat was update successfully',data: cat});
+                    res.status(200).json({info: 'cat was update successfully',data: cat});
                 })
             
            }else{

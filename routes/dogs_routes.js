@@ -25,7 +25,35 @@ module.exports = function(app){
         res.json({info: 'dogs found successfully',data: dogs});
        });
     });
+    app.get('/dog/findDog',function(req,res){
+        const newQuery  = {"name":"dog2"}
+        Dog.find(newQuery,function(err,dog){
+            if (err){
+                res.status(406)
+                res.json({info: 'error during find dog ', error:err});
+                return
+            };
+            if(dog){
+                const myDog = dog[0]
+                console.log(`dog id ${myDog._id}`);
+                console.log(`dog age ${myDog.age}`);
+                myDog.age  ++;
+                console.log(`dog new age ${myDog.age}`);
+                Dog.updateOne({_id:myDog._id},myDog,function(err,myDog){
+                    if (err){
+                        res.json({info: 'error during update', error:err});
+                        return
+                    };
+                    res.json({info: 'myDog was update successfully',data: myDog});
+                   
+                })
 
+               // res.json({info: 'dog found successfully',data: dog});
+            } else {
+                res.status(206).json({info: 'dog was not found '});
+            }
+    });
+});
     app.get('/dog/:id',function(req,res){
         Dog.findById(req.params.id,function(err,dog){
             if (err){
@@ -41,7 +69,7 @@ module.exports = function(app){
             
            });
     });
-
+    
     app.get('/dogs/?',function(req,res){
         const newQuery  = req.query
        
